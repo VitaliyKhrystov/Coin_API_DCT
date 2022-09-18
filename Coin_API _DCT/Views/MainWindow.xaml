@@ -5,8 +5,199 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Coin_API__DCT"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="CoinCap API" Height="700" Width="1100">
+   
+    <Window.Resources>
 
-    </Grid>
+        <SolidColorBrush x:Key="PrussianBlue" Color="#0B3954"/>
+        <SolidColorBrush x:Key="BeauBlue" Color="#BFD7EA"/>
+        <SolidColorBrush x:Key="Bittersweet" Color="#FF6663"/>
+        <SolidColorBrush x:Key="ArcticLime" Color="#E0FF4F"/>
+        <SolidColorBrush x:Key="White" Color="#FEFFFE"/>
+
+
+        <Style TargetType="Grid" x:Key="GridMain">
+            <Setter Property="Background" Value="{StaticResource PrussianBlue}"/>
+        </Style>
+
+        <Style TargetType="TabControl">
+            <Setter Property="Background" Value="#BFD7EA"/>
+        </Style>
+
+        <Style TargetType="TabItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Grid>
+                            <Border
+                                Name="Border"
+                                Margin="0 0 0 -1"
+                                Background="{StaticResource ArcticLime}"
+                                BorderBrush="{StaticResource  PrussianBlue}" 
+                                BorderThickness="1,1,1,0" 
+                                CornerRadius="2,12,0,0">
+                                <ContentPresenter x:Name="ContentSite"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    ContentSource="Header"
+                                    Margin="12,2,12,2"
+                                    RecognizesAccessKey="True"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource BeauBlue}" />
+                                <Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,0" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource ArcticLime}" />
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource PrussianBlue}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontSize" Value="25"/>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="TextBlockListBold">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="TextBlockList">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+        <DataTemplate x:Key="listAssets">
+            <Border  BorderBrush="{StaticResource PrussianBlue}" BorderThickness="2">
+                <Grid>
+                    <Button Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}" 
+                            HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Rank" Style="{StaticResource TextBlockListBold}" />
+                                <TextBlock Text="{Binding Path=Rank}" Style="{StaticResource TextBlockList}" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="Id" Style="{StaticResource TextBlockListBold}" />
+                                <TextBlock Text="{Binding Path=Id}" Style="{StaticResource TextBlockList}" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="Symbol" Style="{StaticResource TextBlockListBold}" />
+                                <TextBlock Text="{Binding Path=Symbol}" Style="{StaticResource TextBlockList}" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="3">
+                                <TextBlock Text="Name" Style="{StaticResource TextBlockListBold}" />
+                                <TextBlock Text="{Binding Path=Name}" Style="{StaticResource TextBlockList}" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="4">
+                                <TextBlock Text="PriceUsd" Style="{StaticResource TextBlockListBold}" />
+                                <TextBlock Text="{Binding Path=PriceUsd}" Style="{StaticResource TextBlockList}" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="5">
+                                <TextBlock Text="Vwap24Hr" Style="{StaticResource TextBlockListBold}"  />
+                                <TextBlock Text="{Binding Path=Vwap24Hr}" Style="{StaticResource TextBlockList}" />
+                            </StackPanel>
+
+                        </Grid>
+                    </Button>
+                </Grid>
+            </Border>
+
+        </DataTemplate>
+
+    </Window.Resources>
+    <ScrollViewer>
+        <Grid Style="{StaticResource GridMain}">
+            <TabControl Name="tabControl">
+
+                <TabItem Header="Top 10 Coins" 
+                         IsSelected="True"
+                         HorizontalAlignment="Stretch"
+                         >
+
+                    <ListBox 
+                            ItemsSource="{Binding Ncoins}"
+                            ItemTemplate="{StaticResource listAssets}" 
+                            Background="{StaticResource BeauBlue}"
+                            Margin="20"/>
+                </TabItem>
+
+                <TabItem Header="Coins List"
+                         IsSelected="False"
+                         HorizontalAlignment="Stretch">
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" 
+                                    Margin="0 20 0 0"
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Center">
+
+                            <TextBox Width="300" 
+                                     FontSize="20" 
+                                     Padding="7"
+                                     BorderBrush="{StaticResource PrussianBlue}"
+                                     BorderThickness="2"
+                                     Margin="0 0 20 0"
+                                     Text="{Binding SearchText}">
+                                <TextBox.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="10"/>
+                                    </Style>
+                                </TextBox.Resources>
+                            </TextBox>
+
+                            <Button Content="Search"
+                                    Padding="10 5"
+                                    Background="{StaticResource Bittersweet}"
+                                    Foreground="{StaticResource PrussianBlue}"
+                                    BorderBrush="{StaticResource PrussianBlue}"
+                                    BorderThickness="2"
+                                    Command="{Binding ClikSearch}">
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="10"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+
+                        </StackPanel>
+
+                        <ListBox 
+                            ItemsSource="{Binding AllCoins}"
+                            Grid.Row="1"
+                            ItemTemplate="{StaticResource listAssets}" 
+                            Background="{StaticResource BeauBlue}"
+                            Margin="20"/>
+                    </Grid>
+
+                </TabItem>
+
+            </TabControl>
+        </Grid>
+    </ScrollViewer>
+
 </Window>
