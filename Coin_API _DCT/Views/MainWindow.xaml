@@ -3,10 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodel="clr-namespace:Coin_API__DCT.ViewModels"
         xmlns:local="clr-namespace:Coin_API__DCT"
         mc:Ignorable="d"
         Title="CoinCap API" Height="700" Width="1100">
-   
+
+    <!--<Window.DataContext>
+        <viewmodel:MainWindowViewModel/>
+    </Window.DataContext>-->
+    
     <Window.Resources>
 
         <SolidColorBrush x:Key="PrussianBlue" Color="#0B3954"/>

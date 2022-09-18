@@ -1,12 +1,14 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Coin_API__DCT.Models
 {
     public class CoinRepository
     {
-        private JsonFile jsonFile { get; }
+        private JsonFile jsonFile { get; set;}
         private Asset Asset { get; set; }
         private string CoinId { get; set; }
         private string filePath = "Files/file.json";
@@ -53,18 +55,19 @@ namespace Coin_API__DCT.Models
             jsonFile = new JsonFile(selectedAPI);
             jsonFile.GetJsonFile();
         }
-        public CoinRepository(API api) : base()
+        public CoinRepository(API api):base()
         {
             this.api = api;
         }
-        public CoinRepository(API api, string coinId) : base()
+        public CoinRepository(API api, string coinId) :base()
         {
-            this.api = api;
             this.CoinId = coinId;
         }
 
         public IEnumerable<Asset> GetAllCoins()
         {
+           
+
             var list = JsonConvert.DeserializeObject<IEnumerable<Asset>>(File.ReadAllText(filePath));
 
             return list;
@@ -72,6 +75,7 @@ namespace Coin_API__DCT.Models
 
         public Asset GetCoinByRank(int rank)
         {
+
             var list = JsonConvert.DeserializeObject<IEnumerable<Asset>>(File.ReadAllText(filePath));
 
             Asset = list.Where(r => r.Rank == rank).FirstOrDefault();
@@ -81,6 +85,7 @@ namespace Coin_API__DCT.Models
 
         public IEnumerable<Asset> GetNCoins(int number)
         {
+
             var list = JsonConvert.DeserializeObject<IEnumerable<Asset>>(File.ReadAllText(filePath));
 
             if (number >= 0)
@@ -93,6 +98,7 @@ namespace Coin_API__DCT.Models
 
         public IEnumerable<Asset> GetFromToCoinsByRank(int from, int till)
         {
+
             var list = JsonConvert.DeserializeObject<IEnumerable<Asset>>(File.ReadAllText(filePath));
 
             if (from >= 0 && till >= 0 && till > from)
@@ -120,6 +126,7 @@ namespace Coin_API__DCT.Models
 
         public IEnumerable<Asset> SearchCoin(string search)
         {
+
             var list = JsonConvert.DeserializeObject<IEnumerable<Asset>>(File.ReadAllText(filePath));
 
             if (search == null)
@@ -169,4 +176,4 @@ namespace Coin_API__DCT.Models
         MarketsApi
     }
 }
-}
+
