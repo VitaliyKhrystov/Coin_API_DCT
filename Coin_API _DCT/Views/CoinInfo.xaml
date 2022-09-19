@@ -6,7 +6,42 @@
         xmlns:local="clr-namespace:Coin_API__DCT.Views"
         mc:Ignorable="d"
         Title="CoinInfo" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <Window.Resources>
+
+        <SolidColorBrush x:Key="PrussianBlue" Color="#0B3954"/>
+        <SolidColorBrush x:Key="BeauBlue" Color="#BFD7EA"/>
+        <SolidColorBrush x:Key="Bittersweet" Color="#FF6663"/>
+        <SolidColorBrush x:Key="ArcticLime" Color="#E0FF4F"/>
+        <SolidColorBrush x:Key="White" Color="#FEFFFE"/>
+
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Background" Value="{StaticResource ArcticLime}" />
+        </Style>
+    </Window.Resources>
+
+    <ScrollViewer>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0"
+                    Background="{StaticResource PrussianBlue}">
+                <Button Content="Main" Command="{Binding MainClick}"/>
+                <Button Content="Market" Command="{Binding MarketClick}"/>
+                <Button Content="Rate" Command="{Binding RateClick}"/>
+                <Button Content="Exchange" Command="{Binding ExchangeClick}"/>
+                <Button Content="History" Command="{Binding HistoryClick}"/>
+            </StackPanel>
+
+            <Frame Grid.Column="1"
+                   Background="{StaticResource BeauBlue}"
+                   Content="{Binding CurrentPage}"
+            />
+        </Grid>
+    </ScrollViewer>
+    
 </Window>
