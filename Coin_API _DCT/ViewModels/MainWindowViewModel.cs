@@ -1,11 +1,14 @@
 ﻿using Coin_API__DCT.Models;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Threading;
 using System.Windows.Input;
 
 namespace Coin_API__DCT.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        private string selectedAPI = "https://api.coincap.io/v2/assets";
         private int number;
         public int Number
         {
@@ -21,7 +24,23 @@ namespace Coin_API__DCT.ViewModels
 
         public CoinRepository coinRepository { get; set; }
         public string SearchText { get; set; }
-        private string selectedAPI = "https://api.coincap.io/v2/assets";
+
+
+        private Asset selectedCoin;
+        public Asset SelectedCoin
+        {
+            get
+            {
+                return selectedCoin;
+            }
+
+            set
+            {
+                selectedCoin = value;
+                OnPropertyChanged("SelectedCoin");
+                GetNewWindow(selectedCoin);
+            }
+        }
 
         public MainWindowViewModel()
         {
@@ -30,8 +49,8 @@ namespace Coin_API__DCT.ViewModels
         }
 
         #region Get n-Coins
-        IEnumerable<Asset> nCoins;
-        public IEnumerable<Asset> Ncoins
+        ObservableCollection<Asset> nCoins;
+        public ObservableCollection<Asset> Ncoins
         {
             get
             {
@@ -42,12 +61,11 @@ namespace Coin_API__DCT.ViewModels
         }
         #endregion
 
-
         #region Get All coins
 
-        IEnumerable<Asset> allCoins;
+        ObservableCollection<Asset> allCoins;
 
-        public IEnumerable<Asset> AllCoins
+        public ObservableCollection<Asset> AllCoins
         {
             get
             {
@@ -87,6 +105,20 @@ namespace Coin_API__DCT.ViewModels
         }
 
         #endregion
+
+        private void GetNewWindow(Asset coin)
+        {
+            Thread newWindowThread = new Thread(
+                () =>
+                {
+                    CoinInfo coinInfo = new CoinInfo(coin);
+                    coinInfo.ShowDialog();
+                    System.Windows.Threading.Dispatcher.Run();
+                });
+            newWindowThread.SetApartmentState(ApartmentState.STA);
+            newWindowThread.IsBackground = true;
+            newWindowThread.Start();
+        }
 
     }
 }
