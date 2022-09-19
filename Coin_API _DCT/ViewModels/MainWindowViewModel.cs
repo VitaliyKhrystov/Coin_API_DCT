@@ -21,10 +21,11 @@ namespace Coin_API__DCT.ViewModels
 
         public CoinRepository coinRepository { get; set; }
         public string SearchText { get; set; }
+        private string selectedAPI = "https://api.coincap.io/v2/assets";
 
         public MainWindowViewModel()
         {
-            coinRepository = new CoinRepository();
+            coinRepository = new CoinRepository(selectedAPI);
             Number = 10;
         }
 

@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 
@@ -9,25 +10,29 @@ namespace Coin_API__DCT.Models
 {
     public class CoinRepository
     {
-        private JsonFile jsonFile { get; set;}
-        private Asset Asset { get; set; }
-        private string CoinId { get; set; }
-        private string filePath = "Files/file.json";
-        private string selectedAPI = "https://api.coincap.io/v2/assets";
+        public JsonFile jsonFile { get; set;}
+        public Asset Asset { get; set; }
+        public string CoinId { get; set; }
+        public string filePath = "Files/file.json";
 
-        public CoinRepository()
+
+        public CoinRepository(string selectedAPI)
         {
-            jsonFile = new JsonFile(selectedAPI);
-            jsonFile.GetJsonFile();
+            GetFile(selectedAPI);
         }
 
-        public IEnumerable<Asset> GetAllCoins()
+        public ObservableCollection<Asset> GetAllCoins()
         {
-           
+            var collectionList = new ObservableCollection<Asset>();
 
             var list = JsonConvert.DeserializeObject<IEnumerable<Asset>>(File.ReadAllText(filePath));
 
-            return list;
+            foreach (var item in list)
+            {
+                collectionList.Add(item);
+            }
+
+            return collectionList;
         }
 
         public Asset GetCoinByRank(int rank)
@@ -37,58 +42,97 @@ namespace Coin_API__DCT.Models
 
             Asset = list.Where(r => r.Rank == rank).FirstOrDefault();
 
-            return Asset;
+            if (Asset != null)
+            {
+                return Asset;
+            }
+
+            return new Asset()
+            {
+                Id = $"Rank {rank} Not Found",
+                Rank = 0,
+                Symbol = "-",
+                Name = "-",
+                Supply = 0,
+                MaxSupply = 0,
+                MarketCapUsd = 0,
+                VolumeUsd24Hr = 0,
+                PriceUsd = 0,
+                ChangePercent24Hr = 0,
+                Vwap24Hr = 0,
+                Explorer = "-"
+            };
         }
 
-        public IEnumerable<Asset> GetNCoins(int number)
+        public ObservableCollection<Asset> GetNCoins(int number)
         {
+            var collectionList = new ObservableCollection<Asset>();
 
             var list = JsonConvert.DeserializeObject<IEnumerable<Asset>>(File.ReadAllText(filePath));
 
             if (number >= 0)
             {
-                return list.Where(r => r.Rank > 0 && r.Rank <= number);
+                foreach (var item in list.Where(r => r.Rank > 0 && r.Rank <= number))
+                {
+                    collectionList.Add(item);
+
+                }
+                return collectionList;
             }
 
-            return list;
+            foreach (var item in list)
+            {
+                collectionList.Add((Asset)item);
+            }
+            return collectionList;
         }
 
-        public IEnumerable<Asset> GetFromToCoinsByRank(int from, int till)
+        public ObservableCollection<Asset> GetFromToCoinsByRank(int from, int till)
         {
-
+            var collectionList = new ObservableCollection<Asset>();
             var list = JsonConvert.DeserializeObject<IEnumerable<Asset>>(File.ReadAllText(filePath));
 
             if (from >= 0 && till >= 0 && till > from)
             {
-                return list.Where(r => r.Rank >= from && r.Rank <= till);
+                foreach (var item in list.Where(r => r.Rank >= from && r.Rank <= till))
+                {
+                    collectionList.Add(item);
+                }
+                return collectionList;
             }
 
-            return new List<Asset>() {
-                new Asset()
-                {
-                    Id = "Not Found",
-                    Rank = 0,
-                    Symbol = "-",
-                    Name = "-",
-                    Supply = 0,
-                    MaxSupply = 0,
-                    MarketCapUsd = 0,
-                    VolumeUsd24Hr = 0,
-                    PriceUsd = 0,
-                    ChangePercent24Hr = 0,
-                    Vwap24Hr = 0,
-                    Explorer = "-"
-                }};
+            collectionList.Add(new Asset()
+            {
+                Id = "Not Found",
+                Rank = 0,
+                Symbol = "-",
+                Name = "-",
+                Supply = 0,
+                MaxSupply = 0,
+                MarketCapUsd = 0,
+                VolumeUsd24Hr = 0,
+                PriceUsd = 0,
+                ChangePercent24Hr = 0,
+                Vwap24Hr = 0,
+                Explorer = "-"
+            });
+
+            return collectionList;
         }
 
-        public IEnumerable<Asset> SearchCoin(string search)
+        public ObservableCollection<Asset> SearchCoin(string search)
         {
+            var collectionList = new ObservableCollection<Asset>();
 
             var list = JsonConvert.DeserializeObject<IEnumerable<Asset>>(File.ReadAllText(filePath));
 
             if (search == null)
             {
-                return list;
+                foreach (var item in list)
+                {
+                    collectionList.Add(item);
+                }
+                return collectionList;
             }
 
             var result = list.Where(n => n.Name.Contains(search) ||
@@ -102,13 +146,12 @@ namespace Coin_API__DCT.Models
 
             if (result.Count == 0)
             {
-                return new List<Asset>() {
-                new Asset()
+                collectionList.Add(new Asset()
                 {
                     Id = "Not Found",
                     Rank = 0,
                     Symbol = "-",
-                    Name = search,
+                    Name = "-",
                     Supply = 0,
                     MaxSupply = 0,
                     MarketCapUsd = 0,
@@ -117,13 +160,24 @@ namespace Coin_API__DCT.Models
                     ChangePercent24Hr = 0,
                     Vwap24Hr = 0,
                     Explorer = "-"
-                }};
+                });
+
+                return collectionList;
             }
 
-            return result;
+            foreach (var item in result)
+            {
+                collectionList.Add(item);
+            }
+
+            return collectionList;
         }
 
-      
+        public void GetFile(string apilink)
+        {
+            jsonFile = new JsonFile(apilink);
+            jsonFile.GetJsonFile();
+        }
     }
 
 }
