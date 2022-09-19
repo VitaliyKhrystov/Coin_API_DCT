@@ -142,6 +142,7 @@
                             x:Name="linksListView"
                             ItemsSource="{Binding Ncoins}"
                             SelectedItem="{Binding SelectedCoin}"
+                            ItemTemplate="{StaticResource listAssets}" 
                             Background="{StaticResource BeauBlue}"
                             Margin="20"/>
                 </TabItem>

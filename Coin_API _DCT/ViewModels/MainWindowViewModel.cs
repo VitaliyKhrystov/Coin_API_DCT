@@ -1,4 +1,5 @@
 ﻿using Coin_API__DCT.Models;
+using Coin_API__DCT.Views;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
