@@ -24,7 +24,7 @@ namespace Coin_API__DCT.ViewModels
 
         public MainWindowViewModel()
         {
-            coinRepository = new CoinRepository(API.AssetsApi);
+            coinRepository = new CoinRepository();
             Number = 10;
         }
 

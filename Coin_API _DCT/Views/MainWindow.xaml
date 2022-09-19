@@ -80,8 +80,8 @@
         <DataTemplate x:Key="listAssets">
             <Border  BorderBrush="{StaticResource PrussianBlue}" BorderThickness="2">
                 <Grid>
-                    <Button Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}" 
-                            HorizontalContentAlignment="Stretch">
+                    <StackPanel HorizontalAlignment="Stretch"  
+                                Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}" >
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="100"/>
@@ -121,9 +121,8 @@
                                 <TextBlock Text="Vwap24Hr" Style="{StaticResource TextBlockListBold}"  />
                                 <TextBlock Text="{Binding Path=Vwap24Hr}" Style="{StaticResource TextBlockList}" />
                             </StackPanel>
-
                         </Grid>
-                    </Button>
+                    </StackPanel>
                 </Grid>
             </Border>
 
@@ -140,8 +139,9 @@
                          >
 
                     <ListBox 
+                            x:Name="linksListView"
                             ItemsSource="{Binding Ncoins}"
-                            ItemTemplate="{StaticResource listAssets}" 
+                            SelectedItem="{Binding SelectedCoin}"
                             Background="{StaticResource BeauBlue}"
                             Margin="20"/>
                 </TabItem>
@@ -194,6 +194,7 @@
                         <ListBox 
                             ItemsSource="{Binding AllCoins}"
                             Grid.Row="1"
+                            SelectedItem="{Binding SelectedCoin}"
                             ItemTemplate="{StaticResource listAssets}" 
                             Background="{StaticResource BeauBlue}"
                             Margin="20"/>

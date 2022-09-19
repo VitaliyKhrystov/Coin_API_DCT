@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,56 +13,12 @@ namespace Coin_API__DCT.Models
         private Asset Asset { get; set; }
         private string CoinId { get; set; }
         private string filePath = "Files/file.json";
-        public API api;
-
-        private string selectedAPI;
-        public string SelectedAPI
-
-        {
-            get { return selectedAPI; }
-
-            set
-            {
-                switch (api)
-                {
-                    case API.AssetsApi:
-                        value = "https://api.coincap.io/v2/assets";
-                        break;
-                    case API.AssetsHistoryApi:
-                        value = $"https://api.coincap.io/v2/assets/{CoinId}/history?interval=d1";
-                        break;
-                    case API.AssetsMarketsApi:
-                        value = $"https://api.coincap.io/v2/assets/{CoinId}/markets";
-                        break;
-                    case API.RatesApi:
-                        value = "https://api.coincap.io/v2/rates";
-                        break;
-                    case API.ExchangesApi:
-                        value = "https://api.coincap.io/v2/exchanges";
-                        break;
-                    case API.MarketsApi:
-                        value = "https://api.coincap.io/v2/markets";
-                        break;
-                    default:
-                        value = "https://api.coincap.io/v2/assets";
-                        break;
-                }
-                selectedAPI = value;
-            }
-        }
+        private string selectedAPI = "https://api.coincap.io/v2/assets";
 
         public CoinRepository()
         {
             jsonFile = new JsonFile(selectedAPI);
             jsonFile.GetJsonFile();
-        }
-        public CoinRepository(API api):base()
-        {
-            this.api = api;
-        }
-        public CoinRepository(API api, string coinId) :base()
-        {
-            this.CoinId = coinId;
         }
 
         public IEnumerable<Asset> GetAllCoins()
@@ -165,15 +122,9 @@ namespace Coin_API__DCT.Models
 
             return result;
         }
+
+      
     }
-    public enum API
-    {
-        AssetsApi,
-        AssetsHistoryApi,
-        AssetsMarketsApi,
-        RatesApi,
-        ExchangesApi,
-        MarketsApi
-    }
+
 }
 

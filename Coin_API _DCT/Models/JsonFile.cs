@@ -23,11 +23,8 @@ namespace Coin_API__DCT.Models
                 File.Delete(FilePath);
             }
 
-            using (WebClient webClient = new WebClient())
-            {
-                json = webClient.DownloadString(API);
-
-            }
+            WebClient webClient = new WebClient();
+            json = webClient.DownloadString(API);
 
             int v = json.IndexOf('[');
             int v2 = json.IndexOf(']');
