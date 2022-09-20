@@ -2,6 +2,7 @@
 using Coin_API__DCT.Pages;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
@@ -11,32 +12,50 @@ namespace Coin_API__DCT.ViewModels
 {
     public class ExchangePageViewModel : ViewModelBase
     {
-        public string id { get; set; }
+        public string assetid { get; set; }
         public CoinRepository CoinRepository { get; set; }
-        private Exchange exchange;
-        public Exchange Exchange 
+        private Coin_API__DCT.Models.Exchange exchangeItem;
+        public Coin_API__DCT.Models.Exchange ExchangeItem 
         {
             get
             {
-                if (exchange == null)
+                if (exchangeItem == null)
                 {
-                    return exchange = CoinRepository.GetCoinById(id);
+                    return exchangeItem = CoinRepository.GetCoinByIdExchange(assetid);
                 }
-                return exchange;
+                return exchangeItem;
             }
 
             set
             {
-                exchange = value;
-                OnPropertyChanged("Exchange");
+                exchangeItem = value;
+                OnPropertyChanged("ExchangeItem");
             }
         }
 
-        public ExchangePageViewModel(string id)
+        public ExchangePageViewModel(string assetid)
         {
-            CoinRepository = new CoinRepository($"https://api.coincap.io/v2/exchanges/{id}");
-            this.id = id;
+            CoinRepository = new CoinRepository("https://api.coincap.io/v2/exchanges");
+            this.assetid = assetid;
         }
 
+        ObservableCollection<Coin_API__DCT.Models.Exchange> allExchanges;
+
+        public ObservableCollection<Coin_API__DCT.Models.Exchange> AllExchanges
+        {
+            get
+            {
+                if (allExchanges == null)
+                    allExchanges = CoinRepository.GetAllExchanges();
+                return allExchanges;
+            }
+
+            set
+            {
+                allExchanges = value;
+                OnPropertyChanged("AllExchanges");
+            }
+
+        }
     }
 }

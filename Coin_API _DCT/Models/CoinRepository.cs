@@ -71,16 +71,16 @@ namespace Coin_API__DCT.Models
          
             var list = JsonConvert.DeserializeObject<IEnumerable<Exchange>>(File.ReadAllText(filePath));
 
-            Exchange = list.Where(r => r.Id == id).FirstOrDefault();
+            Exchange = list.Where(r => r.ExchangeId == id).FirstOrDefault();
 
-            if (Asset != null)
+            if (Exchange != null)
             {
                 return Exchange;
             }
 
             return new Exchange()
             {
-                Id = $"Id {id} Not Found",
+                ExchangeId = $"Id {id} Not Found",
                 Rank = 0,
                 Name = "-",
                 PercentTotalVolume = 0,
@@ -88,8 +88,21 @@ namespace Coin_API__DCT.Models
                 TradingPairs = 0 ,
                 Socket = false,
                 ExchangeUrl = "-",
-                Updated = default
+                Updated = "-"
             };
+        }
+
+        public ObservableCollection<Exchange> GetAllExchanges()
+        {
+            var collectionList = new ObservableCollection<Exchange>();
+            var list = JsonConvert.DeserializeObject<IEnumerable<Exchange>>(File.ReadAllText(filePath));
+
+            foreach (var item in list)
+            {
+                collectionList.Add(item);
+            }
+
+            return collectionList;
         }
 
         public ObservableCollection<Asset> GetNCoins(int number)

@@ -8,6 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Exchange">
 
+    
     <Page.Resources>
 
         <SolidColorBrush x:Key="PrussianBlue" Color="#0B3954"/>
@@ -16,7 +17,84 @@
         <SolidColorBrush x:Key="ArcticLime" Color="#E0FF4F"/>
         <SolidColorBrush x:Key="White" Color="#FEFFFE"/>
 
-        </Page.Resources>
+        <Style TargetType="TextBox" x:Key="TextBox">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Background" Value="{StaticResource White}"/>
+            <Setter Property="Foreground" Value="{StaticResource PrussianBlue}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="TextBox2">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Background" Value="{StaticResource White}"/>
+            <Setter Property="Foreground" Value="{StaticResource PrussianBlue}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="5 0 0 0"/>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="TextBlock">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Background" Value="{StaticResource White}"/>
+            <Setter Property="Foreground" Value="{StaticResource PrussianBlue}"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+        <DataTemplate x:Key="listExchanges">
+            <StackPanel HorizontalAlignment="Stretch"  
+                        Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}" 
+                        Background="{StaticResource White}">
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="240"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <StackPanel Grid.Column="0">
+                        <TextBox Text="Id" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="Name" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="Rank" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="PercentTotalVolume" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="VolumeUsd" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="TradingPairs" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="Socket" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="ExchangeUrl" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="Updated" Style="{StaticResource TextBox}"/>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Column="1">
+                        <TextBox Text="{Binding Path=ExchangeId}" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="{Binding Path=Name}" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="{Binding Path=Rank}" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="{Binding Path=PercentTotalVolume}" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="{Binding Path=VolumeUsd}" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="{Binding Path=TradingPairs}" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="{Binding Path=Socket}" Style="{StaticResource TextBox}"/>
+                        <TextBlock  Style="{StaticResource TextBlock}">
+                           <Hyperlink NavigateUri="{Binding Path=ExchangeUrl}">website</Hyperlink>
+                        </TextBlock>
+                        <TextBox Text="{Binding Path=Updated}" Style="{StaticResource TextBox}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBox Text="unique identifier for exchange" Style="{StaticResource TextBox2}"/>
+                        <TextBox Text="proper name of exchange" Style="{StaticResource TextBox2}"/>
+                        <TextBox Text="rank is in ascending order - this number is directly associated with the total exchange volume whereas the highest volume exchange receives rank 1" Style="{StaticResource TextBox2}"/>
+                        <TextBox Text="the amount of daily volume a single exchange transacts in relation to total daily volume of all exchanges" Style="{StaticResource TextBox2}"/>
+                        <TextBox Text="daily volume represented in USD" Style="{StaticResource TextBox2}"/>
+                        <TextBox Text="number of trading pairs (or markets) offered by exchange" Style="{StaticResource TextBox2}"/>
+                        <TextBox Text="true/false, true = trade socket available, false = trade socket unavailable" Style="{StaticResource TextBox2}"/>
+                        <TextBox Text="website to exchange" Style="{StaticResource TextBox2}"/>
+                        <TextBox Text="UNIX timestamp (milliseconds) since information was received from this exchange" Style="{StaticResource TextBox2}"/>
+                    </StackPanel>
+                    
+                </Grid>
+            </StackPanel>
+        </DataTemplate>
+
+
+    </Page.Resources>
 
         <Grid>
             <Grid.RowDefinitions>
@@ -24,19 +102,28 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0">
-                <TextBox Text="{Binding CoinName}"
-                     HorizontalContentAlignment="Center"
-                     FontSize="20"
-                     FontWeight="Bold"
-                     Padding="0 10 0 10"
-                     Background="{StaticResource Bittersweet}"/>
+            <TextBox Text="Exchanges"
+                         HorizontalContentAlignment="Center"
+                         FontSize="20"
+                         FontWeight="Bold"
+                         Padding="0 10 0 10"
+                         Background="{StaticResource Bittersweet}"/>
                 <TextBox TextWrapping="Wrap"
-                     FontSize="15"
-                     Padding="10"
-                     Background="{StaticResource ArcticLime}">
-                Exchanges
-                The /exchanges endpoint offers an understanding into the where cryptocurrency is being exchanged and offers high-level information on those exchanges. CoinCap strives to provide transparency in the recency of our exchange data. For that purpose you will find an "updated" key for each exchange. For more details into coin pairs and volume, see the /markets endpoint.
+                         FontSize="15"
+                         Padding="10"
+                         Background="{StaticResource ArcticLime}">
+                    
+                    The /exchanges endpoint offers an understanding into the where cryptocurrency is being exchanged and offers high-level information on those exchanges. CoinCap strives to provide transparency in the recency of our exchange data. For that purpose you will find an "updated" key for each exchange. For more details into coin pairs and volume, see the /markets endpoint.
                 </TextBox>
+
+            <StackPanel Margin="5">
+                <ListBox 
+                            ItemsSource="{Binding AllExchanges}"
+                            ItemTemplate="{StaticResource listExchanges}" 
+                            Background="{StaticResource BeauBlue}"
+                            Margin="20"/>
             </StackPanel>
+                
+        </StackPanel>
         </Grid>
 </Page>

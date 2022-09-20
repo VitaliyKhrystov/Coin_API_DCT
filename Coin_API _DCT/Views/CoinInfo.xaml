@@ -38,7 +38,7 @@
             </StackPanel>
 
             <Frame Grid.Column="1"
-                   Background="{StaticResource PrussianBlue}"
+                   Background="{StaticResource White}"
                    Content="{Binding CurrentPage}"
             />
         </Grid>
