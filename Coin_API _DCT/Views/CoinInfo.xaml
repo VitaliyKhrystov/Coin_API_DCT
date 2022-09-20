@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Coin_API__DCT.Views"
         mc:Ignorable="d"
-        Title="CoinInfo" Height="450" Width="800">
+        Title="CoinInfo" Height="500" Width="1300">
     <Window.Resources>
 
         <SolidColorBrush x:Key="PrussianBlue" Color="#0B3954"/>
@@ -38,7 +38,7 @@
             </StackPanel>
 
             <Frame Grid.Column="1"
-                   Background="{StaticResource BeauBlue}"
+                   Background="{StaticResource PrussianBlue}"
                    Content="{Binding CurrentPage}"
             />
         </Grid>

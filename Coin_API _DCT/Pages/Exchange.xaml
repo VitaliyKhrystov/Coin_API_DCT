@@ -8,7 +8,35 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Exchange">
 
-    <Grid>
-        
-    </Grid>
+    <Page.Resources>
+
+        <SolidColorBrush x:Key="PrussianBlue" Color="#0B3954"/>
+        <SolidColorBrush x:Key="BeauBlue" Color="#BFD7EA"/>
+        <SolidColorBrush x:Key="Bittersweet" Color="#FF6663"/>
+        <SolidColorBrush x:Key="ArcticLime" Color="#E0FF4F"/>
+        <SolidColorBrush x:Key="White" Color="#FEFFFE"/>
+
+        </Page.Resources>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0">
+                <TextBox Text="{Binding CoinName}"
+                     HorizontalContentAlignment="Center"
+                     FontSize="20"
+                     FontWeight="Bold"
+                     Padding="0 10 0 10"
+                     Background="{StaticResource Bittersweet}"/>
+                <TextBox TextWrapping="Wrap"
+                     FontSize="15"
+                     Padding="10"
+                     Background="{StaticResource ArcticLime}">
+                Exchanges
+                The /exchanges endpoint offers an understanding into the where cryptocurrency is being exchanged and offers high-level information on those exchanges. CoinCap strives to provide transparency in the recency of our exchange data. For that purpose you will find an "updated" key for each exchange. For more details into coin pairs and volume, see the /markets endpoint.
+                </TextBox>
+            </StackPanel>
+        </Grid>
 </Page>
