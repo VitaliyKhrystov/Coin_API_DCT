@@ -8,7 +8,110 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Rate">
 
+    <Page.Resources>
+
+        <SolidColorBrush x:Key="PrussianBlue" Color="#0B3954"/>
+        <SolidColorBrush x:Key="BeauBlue" Color="#BFD7EA"/>
+        <SolidColorBrush x:Key="Bittersweet" Color="#FF6663"/>
+        <SolidColorBrush x:Key="ArcticLime" Color="#E0FF4F"/>
+        <SolidColorBrush x:Key="White" Color="#FEFFFE"/>
+
+        <Style TargetType="TextBox" x:Key="TextBox">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Background" Value="{StaticResource White}"/>
+            <Setter Property="Foreground" Value="{StaticResource PrussianBlue}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="TextBox2">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Background" Value="{StaticResource White}"/>
+            <Setter Property="Foreground" Value="{StaticResource PrussianBlue}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="5 0 0 0"/>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="TextBlock">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Background" Value="{StaticResource White}"/>
+            <Setter Property="Foreground" Value="{StaticResource PrussianBlue}"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+        <DataTemplate x:Key="listRates">
+            <StackPanel HorizontalAlignment="Stretch"  
+                        Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}" 
+                        Background="{StaticResource White}">
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="240"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBox Text="Id" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="Symbol" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="CurrencySymbol" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="RateUsd" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="Type" Style="{StaticResource TextBox}"/>
+
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+                        <TextBox Text="{Binding Path=Id}" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="{Binding Path=Symbol}" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="{Binding Path=CurrencySymbol}" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="{Binding Path=RateUsd}" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="{Binding Path=Type}" Style="{StaticResource TextBox}"/>
+
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBox Text="unique identifier for asset or fiat" Style="{StaticResource TextBox2}"/>
+                        <TextBox Text="most common symbol used to identify asset or fiat" Style="{StaticResource TextBox2}"/>
+                        <TextBox Text="currency symbol used to identify asset or fiat" Style="{StaticResource TextBox2}"/>
+                        <TextBox Text="rate conversion to USD" Style="{StaticResource TextBox2}"/>
+                        <TextBox Text="type of currency - fiat or crypto" Style="{StaticResource TextBox2}"/>
+                    </StackPanel>
+
+                </Grid>
+            </StackPanel>
+        </DataTemplate>
+
+
+    </Page.Resources>
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBox Text="Rates"
+                         HorizontalContentAlignment="Center"
+                         FontSize="20"
+                         FontWeight="Bold"
+                         Padding="0 10 0 10"
+                         Background="{StaticResource Bittersweet}"/>
+            <TextBox TextWrapping="Wrap"
+                         FontSize="15"
+                         Padding="10"
+                         Background="{StaticResource ArcticLime}">
+
+                All prices on the CoinCap API are standardized in USD (United States Dollar). To make translating to other values easy, CoinCap now offers a Rates endpoint. We offer fiat and top cryptocurrency translated rates. Fiat rates are available through OpenExchangeRates.org.
+            </TextBox>
+
+            <StackPanel Margin="5">
+                <ListBox 
+                            ItemsSource="{Binding RateList}"
+                            ItemTemplate="{StaticResource listRates}" 
+                            Background="{StaticResource BeauBlue}"
+                            Margin="20"/>
+            </StackPanel>
+
+        </StackPanel>
     </Grid>
 </Page>
+

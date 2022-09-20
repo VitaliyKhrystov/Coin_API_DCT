@@ -33,8 +33,8 @@
                 <Button Content="Main" Command="{Binding MainClick}"/>
                 <Button Content="Market" Command="{Binding MarketClick}"/>
                 <Button Content="Rate" Command="{Binding RateClick}"/>
-                <Button Content="Exchange" Command="{Binding ExchangeClick}"/>
                 <Button Content="History" Command="{Binding HistoryClick}"/>
+                <Button Content="Exchange" Command="{Binding ExchangeClick}"/>
             </StackPanel>
 
             <Frame Grid.Column="1"

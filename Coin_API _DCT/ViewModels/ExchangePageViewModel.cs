@@ -19,10 +19,6 @@ namespace Coin_API__DCT.ViewModels
         {
             get
             {
-                if (exchangeItem == null)
-                {
-                    return exchangeItem = CoinRepository.GetCoinByIdExchange(assetid);
-                }
                 return exchangeItem;
             }
 

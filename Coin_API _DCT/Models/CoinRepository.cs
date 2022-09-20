@@ -16,15 +16,17 @@ namespace Coin_API__DCT.Models
         public Exchange Exchange { get; set; }
         public string CoinId { get; set; }
         public string filePath = "Files/file.json";
-
+        public string selectedAPI { get; set; }
 
         public CoinRepository(string selectedAPI)
         {
-            GetFile(selectedAPI);
+            this.selectedAPI = selectedAPI;
+            
         }
 
         public ObservableCollection<Asset> GetAllCoins()
         {
+            GetFile(selectedAPI);
             var collectionList = new ObservableCollection<Asset>();
 
             var list = JsonConvert.DeserializeObject<IEnumerable<Asset>>(File.ReadAllText(filePath));
@@ -39,7 +41,7 @@ namespace Coin_API__DCT.Models
 
         public Asset GetCoinByRank(int rank)
         {
-
+            GetFile(selectedAPI);
             var list = JsonConvert.DeserializeObject<IEnumerable<Asset>>(File.ReadAllText(filePath));
 
             Asset = list.Where(r => r.Rank == rank).FirstOrDefault();
@@ -68,7 +70,7 @@ namespace Coin_API__DCT.Models
 
         public Exchange GetCoinByIdExchange(string id)
         {
-         
+            GetFile(selectedAPI);
             var list = JsonConvert.DeserializeObject<IEnumerable<Exchange>>(File.ReadAllText(filePath));
 
             Exchange = list.Where(r => r.ExchangeId == id).FirstOrDefault();
@@ -94,6 +96,7 @@ namespace Coin_API__DCT.Models
 
         public ObservableCollection<Exchange> GetAllExchanges()
         {
+            GetFile(selectedAPI);
             var collectionList = new ObservableCollection<Exchange>();
             var list = JsonConvert.DeserializeObject<IEnumerable<Exchange>>(File.ReadAllText(filePath));
 
@@ -107,6 +110,7 @@ namespace Coin_API__DCT.Models
 
         public ObservableCollection<Asset> GetNCoins(int number)
         {
+            GetFile(selectedAPI);
             var collectionList = new ObservableCollection<Asset>();
 
             var list = JsonConvert.DeserializeObject<IEnumerable<Asset>>(File.ReadAllText(filePath));
@@ -130,6 +134,7 @@ namespace Coin_API__DCT.Models
 
         public ObservableCollection<Asset> GetFromToCoinsByRank(int from, int till)
         {
+            GetFile(selectedAPI);
             var collectionList = new ObservableCollection<Asset>();
             var list = JsonConvert.DeserializeObject<IEnumerable<Asset>>(File.ReadAllText(filePath));
 
@@ -161,8 +166,23 @@ namespace Coin_API__DCT.Models
             return collectionList;
         }
 
+        public ObservableCollection<Rate> GetRates()
+        {
+            GetFile(selectedAPI);
+            var collectionList = new ObservableCollection<Rate>();
+            var list = JsonConvert.DeserializeObject<IEnumerable<Rate>>(File.ReadAllText(filePath));
+
+            foreach (var item in list)
+            {
+                collectionList.Add(item);
+            }
+
+            return collectionList;
+        }
+
         public ObservableCollection<Asset> SearchCoin(string search)
         {
+            GetFile(selectedAPI);
             var collectionList = new ObservableCollection<Asset>();
 
             var list = JsonConvert.DeserializeObject<IEnumerable<Asset>>(File.ReadAllText(filePath));
