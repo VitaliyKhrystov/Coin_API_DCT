@@ -180,6 +180,20 @@ namespace Coin_API__DCT.Models
             return collectionList;
         }
 
+        public ObservableCollection<AssetHistory> GetHistoryList()
+        {
+            GetFile(selectedAPI);
+            var collectionList = new ObservableCollection<AssetHistory>();
+            var list = JsonConvert.DeserializeObject<IEnumerable<AssetHistory>>(File.ReadAllText(filePath));
+
+            foreach (var item in list)
+            {
+                collectionList.Add(item);
+            }
+
+            return collectionList;
+        }
+
         public ObservableCollection<Asset> SearchCoin(string search)
         {
             GetFile(selectedAPI);

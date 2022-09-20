@@ -1,12 +1,6 @@
 ﻿using Coin_API__DCT.Models;
-using Coin_API__DCT.Pages;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Coin_API__DCT.ViewModels
 {
@@ -29,10 +23,10 @@ namespace Coin_API__DCT.ViewModels
             }
         }
 
-        public ExchangePageViewModel(string assetid)
+        public ExchangePageViewModel(Asset asset)
         {
             CoinRepository = new CoinRepository("https://api.coincap.io/v2/exchanges");
-            this.assetid = assetid;
+            this.assetid = asset.Id;
         }
 
         ObservableCollection<Coin_API__DCT.Models.Exchange> allExchanges;

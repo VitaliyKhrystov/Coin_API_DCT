@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Coin_API__DCT.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Coin_API__DCT.ViewModels
 {
     public class MarketPageViewModel : ViewModelBase
     {
-        public MarketPageViewModel(string coinId)
+        public MarketPageViewModel(Asset asset)
         {
 
         }

@@ -1,0 +1,94 @@
+﻿<Page x:Class="Coin_API__DCT.Pages.HistoryCoin"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Coin_API__DCT.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="History">
+
+    <Page.Resources>
+
+        <SolidColorBrush x:Key="PrussianBlue" Color="#0B3954"/>
+        <SolidColorBrush x:Key="BeauBlue" Color="#BFD7EA"/>
+        <SolidColorBrush x:Key="Bittersweet" Color="#FF6663"/>
+        <SolidColorBrush x:Key="ArcticLime" Color="#E0FF4F"/>
+        <SolidColorBrush x:Key="White" Color="#FEFFFE"/>
+
+        <Style TargetType="TextBox" x:Key="TextBox">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Background" Value="{StaticResource White}"/>
+            <Setter Property="Foreground" Value="{StaticResource PrussianBlue}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="TextBox2">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Background" Value="{StaticResource White}"/>
+            <Setter Property="Foreground" Value="{StaticResource PrussianBlue}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="5 0 0 0"/>
+        </Style>
+
+        <DataTemplate x:Key="listHistories">
+            <StackPanel HorizontalAlignment="Stretch"  
+                        Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}" 
+                        Background="{StaticResource White}">
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="500"/>
+                        <ColumnDefinition Width="*"/>
+
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBox Text="PriceUsd" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="{Binding Path=PriceUsd}" Style="{StaticResource TextBox2}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+                        <TextBox Text="Time" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="{Binding Path=Time}" Style="{StaticResource TextBox2}"/>
+                    </StackPanel>
+                    
+                </Grid>
+            </StackPanel>
+        </DataTemplate>
+
+
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBox Text="{Binding CoinName}"
+                         HorizontalContentAlignment="Center"
+                         FontSize="20"
+                         FontWeight="Bold"
+                         Padding="0 10 0 10"
+                         Background="{StaticResource Bittersweet}"/>
+            <TextBox TextWrapping="Wrap"
+                         FontSize="15"
+                         Padding="10"
+                         Background="{StaticResource ArcticLime}">
+
+                The /exchanges endpoint offers an understanding into the where cryptocurrency is being exchanged and offers high-level information on those exchanges. CoinCap strives to provide transparency in the recency of our exchange data. For that purpose you will find an "updated" key for each exchange. For more details into coin pairs and volume, see the /markets endpoint.
+            </TextBox>
+
+            <StackPanel Margin="5">
+                <ListBox 
+                            ItemsSource="{Binding HistoryList}"
+                            ItemTemplate="{StaticResource listHistories}" 
+                            Background="{StaticResource BeauBlue}"
+                            Margin="20"/>
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</Page>

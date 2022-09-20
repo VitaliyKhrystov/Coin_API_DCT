@@ -1,4 +1,5 @@
-﻿using Coin_API__DCT.ViewModels;
+﻿using Coin_API__DCT.Models;
+using Coin_API__DCT.ViewModels;
 using System.Windows.Controls;
 
 
@@ -9,10 +10,10 @@ namespace Coin_API__DCT.Pages
     /// </summary>
     public partial class Rate : Page
     {
-        public Rate(string coinID)
+        public Rate(Asset asset)
         {
             InitializeComponent();
-            DataContext = new RatePageViewModel(coinID);
+            DataContext = new RatePageViewModel(asset);
         }
     }
 }

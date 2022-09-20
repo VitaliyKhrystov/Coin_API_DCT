@@ -1,10 +1,6 @@
 ﻿using Coin_API__DCT.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Coin_API__DCT.ViewModels
 {
@@ -26,7 +22,7 @@ namespace Coin_API__DCT.ViewModels
             }
         }
 
-        public RatePageViewModel(string coinId)
+        public RatePageViewModel(Asset asset)
         {
             CoinRepository = new CoinRepository("https://api.coincap.io/v2/rates");
         }

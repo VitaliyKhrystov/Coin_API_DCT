@@ -1,4 +1,5 @@
-﻿using Coin_API__DCT.ViewModels;
+﻿using Coin_API__DCT.Models;
+using Coin_API__DCT.ViewModels;
 using System.Windows.Controls;
 
 
@@ -9,10 +10,10 @@ namespace Coin_API__DCT.Pages
     /// </summary>
     public partial class Exchange : Page
     {
-        public Exchange(string coinID)
+        public Exchange(Asset asset)
         {
             InitializeComponent();
-            DataContext = new ExchangePageViewModel(coinID);
+            DataContext = new ExchangePageViewModel(asset);
         }
     }
 }

@@ -29,11 +29,11 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0"
-                    Background="{StaticResource PrussianBlue}">
+                        Background="{StaticResource PrussianBlue}">
                 <Button Content="Main" Command="{Binding MainClick}"/>
                 <Button Content="Market" Command="{Binding MarketClick}"/>
-                <Button Content="Rate" Command="{Binding RateClick}"/>
                 <Button Content="History" Command="{Binding HistoryClick}"/>
+                <Button Content="Rate" Command="{Binding RateClick}"/>
                 <Button Content="Exchange" Command="{Binding ExchangeClick}"/>
             </StackPanel>
 
