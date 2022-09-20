@@ -33,14 +33,15 @@ namespace Coin_API__DCT.ViewModels
             }
         }
 
+
         public CoinInfoViewModel(Asset asset)
         {
             this.asset = asset;
-            Coin = new Coin();
-            Market = new Market();
-            Rate = new Rate();
-            Exchange = new Exchange();
-            History = new Page();
+            Coin = new Coin(asset);
+            Market = new Market(asset.Id);
+            Rate = new Rate(asset.Id);
+            Exchange = new Exchange(asset.Id);
+            History = new History(asset.Id);
             CurrentPage = Coin;
         }
 

@@ -8,7 +8,449 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Coin">
 
+    <Page.Resources>
+
+        <SolidColorBrush x:Key="PrussianBlue" Color="#0B3954"/>
+        <SolidColorBrush x:Key="BeauBlue" Color="#BFD7EA"/>
+        <SolidColorBrush x:Key="Bittersweet" Color="#FF6663"/>
+        <SolidColorBrush x:Key="ArcticLime" Color="#E0FF4F"/>
+        <SolidColorBrush x:Key="White" Color="#FEFFFE"/>
+
+    </Page.Resources>
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBox Text="{Binding CoinName}"
+                     HorizontalContentAlignment="Center"
+                     FontSize="20"
+                     FontWeight="Bold"
+                     Padding="0 10 0 10"
+                     Background="{StaticResource Bittersweet}"/>
+            <TextBox TextWrapping="Wrap"
+                     FontSize="15"
+                     Padding="10"
+                     Background="{StaticResource ArcticLime}">
+                Assets
+                The asset price is a volume-weighted average calculated by collecting ticker data 
+                from exchanges. Each exchange contributes to this price in relation to their volume, 
+                meaning higher volume exchanges have more affect on this global price. All values are 
+                translated into USD (United States Dollar) and can be translated into other units of 
+                measurement through the /rates endpoint.
+            </TextBox>
+
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="240"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBox Text="Key"
+                                 FontSize="15"
+                                 FontWeight="Bold"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBox Text="Value"
+                                 FontSize="15"
+                                 FontWeight="Bold"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBox Text="Description"
+                                 FontSize="15"
+                                 FontWeight="Bold"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="240"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBox Text="Id"
+                                 FontSize="15"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBox Text="{Binding ID}"
+                                 FontSize="15"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBox Text="unique identifier for asset"
+                                 FontSize="15"
+                                 Padding="5 0"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Left"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="240"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBox Text="Rank"
+                                 FontSize="15"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBox Text="{Binding Rank}"
+                                 FontSize="15"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBox Text="rank is in ascending order - this number is directly associated with the marketcap whereas the highest marketcap receives rank 1"
+                                 FontSize="15"
+                                 Padding="5 0"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Left"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="240"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBox Text="Symbol"
+                                 FontSize="15"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBox Text="{Binding Symbol}"
+                                 FontSize="15"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBox Text="most common symbol used to identify this asset on an exchange"
+                                 FontSize="15"
+                                 Padding="5 0"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Left"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="240"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBox Text="Name"
+                                 FontSize="15"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBox Text="{Binding CoinName}"
+                                 FontSize="15"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBox Text="proper name for asset"
+                                 FontSize="15"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 Padding="5 0"
+                                 HorizontalContentAlignment="Left"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="240"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBox Text="Supply"
+                                 FontSize="15"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBox Text="{Binding Supply}"
+                                 FontSize="15"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBox Text="available supply for trading"
+                                 FontSize="15"
+                                 Padding="5 0"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Left"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="240"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBox Text="MaxSupply"
+                                 FontSize="15"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBox Text="{Binding MaxSupply}"
+                                 FontSize="15"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBox Text="total quantity of asset issued"
+                                 FontSize="15"
+                                 Padding="5 0"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Left"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="240"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBox Text="MarketCapUsd"
+                                 FontSize="15"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBox Text="{Binding MarketCapUsd}"
+                                 FontSize="15"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBox Text="supply x price"
+                                 FontSize="15"
+                                 Padding="5 0"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Left"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="240"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBox Text="VolumeUsd24Hr"
+                                 FontSize="15"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBox Text="{Binding VolumeUsd24Hr}"
+                                 FontSize="15"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBox Text="quantity of trading volume represented in USD over the last 24 hours"
+                                 FontSize="15"
+                                 Padding="5 0"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Left"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="240"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBox Text="PriceUsd"
+                                 FontSize="15"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBox Text="{Binding PriceUsd}"
+                                 FontSize="15"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBox Text="volume-weighted price based on real-time market data, translated to USD"
+                                 FontSize="15"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 Padding="5 0"
+                                 HorizontalContentAlignment="Left"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="240"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBox Text="ChangePercent24Hr"
+                                 FontSize="15"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBox Text="{Binding ChangePercent24Hr}"
+                                 FontSize="15"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBox Text="the direction and value change in the last 24 hours"
+                                 FontSize="15"
+                                 Padding="5 0"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Left"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="240"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBox Text="Vwap24Hr"
+                                 FontSize="15"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBox Text="{Binding Vwap24Hr}"
+                                 FontSize="15"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBox Text="Volume Weighted Average Price in the last 24 hours"
+                                 FontSize="15"
+                                 Padding="5 0"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Left"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="240"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBox Text="Explorer"
+                                 FontSize="15"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock FontSize="16"
+                                   Background="{StaticResource PrussianBlue}"
+                                   Foreground="{StaticResource White}"
+                                   Padding="0"
+                                   HorizontalAlignment="Center">
+                            <Hyperlink NavigateUri="{Binding Explorer}">website</Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBox 
+                                 FontSize="15"
+                                 Background="{StaticResource PrussianBlue}"
+                                 Foreground="{StaticResource White}"
+                                 HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+
+                </Grid>
+            </StackPanel>
+
+        </StackPanel>
+
     </Grid>
 </Page>
