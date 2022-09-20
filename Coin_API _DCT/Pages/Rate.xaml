@@ -23,19 +23,14 @@
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
         </Style>
 
-        <Style TargetType="TextBox" x:Key="TextBox2">
+        <Style TargetType="TextBox" x:Key="TextBox2" BasedOn="{StaticResource TextBox}">
             <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Background" Value="{StaticResource White}"/>
-            <Setter Property="Foreground" Value="{StaticResource PrussianBlue}"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="Padding" Value="5 0 0 0"/>
         </Style>
-
-        <Style TargetType="TextBlock" x:Key="TextBlock">
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Background" Value="{StaticResource White}"/>
-            <Setter Property="Foreground" Value="{StaticResource PrussianBlue}"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
+        
+        <Style TargetType="TextBox" x:Key="TextBox3" BasedOn="{StaticResource TextBox}">
+            <Setter Property="FontWeight" Value="Bold"/>
         </Style>
 
         <DataTemplate x:Key="listRates">
@@ -51,11 +46,11 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="0">
-                        <TextBox Text="Id" Style="{StaticResource TextBox}"/>
-                        <TextBox Text="Symbol" Style="{StaticResource TextBox}"/>
-                        <TextBox Text="CurrencySymbol" Style="{StaticResource TextBox}"/>
-                        <TextBox Text="RateUsd" Style="{StaticResource TextBox}"/>
-                        <TextBox Text="Type" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="Id" Style="{StaticResource TextBox3}"/>
+                        <TextBox Text="Symbol" Style="{StaticResource TextBox3}"/>
+                        <TextBox Text="CurrencySymbol" Style="{StaticResource TextBox3}"/>
+                        <TextBox Text="RateUsd" Style="{StaticResource TextBox3}"/>
+                        <TextBox Text="Type" Style="{StaticResource TextBox3}"/>
 
                     </StackPanel>
 

@@ -8,8 +8,106 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Market">
 
-    
-    
-    
-    
- </Page>
+
+    <Page.Resources>
+
+        <SolidColorBrush x:Key="PrussianBlue" Color="#0B3954"/>
+        <SolidColorBrush x:Key="BeauBlue" Color="#BFD7EA"/>
+        <SolidColorBrush x:Key="Bittersweet" Color="#FF6663"/>
+        <SolidColorBrush x:Key="ArcticLime" Color="#E0FF4F"/>
+        <SolidColorBrush x:Key="White" Color="#FEFFFE"/>
+
+        <Style TargetType="TextBox" x:Key="TextBox">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Background" Value="{StaticResource White}"/>
+            <Setter Property="Foreground" Value="{StaticResource PrussianBlue}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="TextBox2" BasedOn="{StaticResource TextBox}">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="5 0 0 0"/>
+        </Style>
+
+
+        <Style TargetType="TextBox" x:Key="TextBox3" BasedOn ="{StaticResource TextBox}">
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <DataTemplate x:Key="listMarkets">
+            <StackPanel HorizontalAlignment="Stretch"  
+                        Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}" 
+                        Background="{StaticResource White}">
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="240"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBox Text="ExchangeId" Style="{StaticResource TextBox3}"/>
+                        <TextBox Text="BaseId" Style="{StaticResource TextBox3}"/>
+                        <TextBox Text="QuoteId" Style="{StaticResource TextBox3}"/>
+                        <TextBox Text="BaseSymbol" Style="{StaticResource TextBox3}"/>
+                        <TextBox Text="QuoteSymbol" Style="{StaticResource TextBox3}"/>
+                        <TextBox Text="VolumeUsd24Hr" Style="{StaticResource TextBox3}"/>
+                        <TextBox Text="PriceUsd" Style="{StaticResource TextBox3}"/>
+                        <TextBox Text="VolumePercent" Style="{StaticResource TextBox3}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+                        <TextBox Text="{Binding Path=ExchangeId}" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="{Binding Path=BaseId}" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="{Binding Path=QuoteId}" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="{Binding Path=BaseSymbol}" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="{Binding Path=QuoteSymbol}" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="{Binding Path=VolumeUsd24Hr}" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="{Binding Path=PriceUsd}" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="{Binding Path=VolumePercent}" Style="{StaticResource TextBox}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBox Text="unique identifier for exchange" Style="{StaticResource TextBox2}"/>
+                        <TextBox Text="unique identifier for this asset, base is asset purchased" Style="{StaticResource TextBox2}"/>
+                        <TextBox Text="unique identifier for this asset, quote is asset used to purchase based" Style="{StaticResource TextBox2}"/>
+                        <TextBox Text="most common symbol used to identify asset, base is asset purchased" Style="{StaticResource TextBox2}"/>
+                        <TextBox Text="most common symbol used to identify asset, quote is asset used to purchase base" Style="{StaticResource TextBox2}"/>
+                        <TextBox Text="volume transacted on this market in last 24 hours" Style="{StaticResource TextBox2}"/>
+                        <TextBox Text="the amount of quote asset traded for one unit of base asset" Style="{StaticResource TextBox2}"/>
+                        <TextBox Text="percent of quote asset volume" Style="{StaticResource TextBox2}"/>
+                    </StackPanel>
+
+                </Grid>
+            </StackPanel>
+        </DataTemplate>
+
+
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBox Text="{Binding CoinName}"
+                         HorizontalContentAlignment="Center"
+                         FontSize="20"
+                         FontWeight="Bold"
+                         Padding="0 10 0 10"
+                         Background="{StaticResource Bittersweet}"/>
+
+            <StackPanel Margin="5">
+                <ListBox 
+                            ItemsSource="{Binding MarketList}"
+                            ItemTemplate="{StaticResource listMarkets}" 
+                            Background="{StaticResource BeauBlue}"
+                            Margin="20"/>
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</Page>

@@ -24,12 +24,13 @@
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
         </Style>
 
-        <Style TargetType="TextBox" x:Key="TextBox2">
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Background" Value="{StaticResource White}"/>
-            <Setter Property="Foreground" Value="{StaticResource PrussianBlue}"/>
+        <Style TargetType="TextBox" x:Key="TextBox2" BasedOn="{StaticResource TextBox}">
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="Padding" Value="5 0 0 0"/>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="TextBox3" BasedOn="{StaticResource TextBox}">
+            <Setter Property="FontWeight" Value="Bold"/>
         </Style>
 
         <Style TargetType="TextBlock" x:Key="TextBlock">
@@ -52,15 +53,15 @@
                     </Grid.ColumnDefinitions>
                     
                     <StackPanel Grid.Column="0">
-                        <TextBox Text="Id" Style="{StaticResource TextBox}"/>
-                        <TextBox Text="Name" Style="{StaticResource TextBox}"/>
-                        <TextBox Text="Rank" Style="{StaticResource TextBox}"/>
-                        <TextBox Text="PercentTotalVolume" Style="{StaticResource TextBox}"/>
-                        <TextBox Text="VolumeUsd" Style="{StaticResource TextBox}"/>
-                        <TextBox Text="TradingPairs" Style="{StaticResource TextBox}"/>
-                        <TextBox Text="Socket" Style="{StaticResource TextBox}"/>
-                        <TextBox Text="ExchangeUrl" Style="{StaticResource TextBox}"/>
-                        <TextBox Text="Updated" Style="{StaticResource TextBox}"/>
+                        <TextBox Text="Id" Style="{StaticResource TextBox3}"/>
+                        <TextBox Text="Name" Style="{StaticResource TextBox3}"/>
+                        <TextBox Text="Rank" Style="{StaticResource TextBox3}"/>
+                        <TextBox Text="PercentTotalVolume" Style="{StaticResource TextBox3}"/>
+                        <TextBox Text="VolumeUsd" Style="{StaticResource TextBox3}"/>
+                        <TextBox Text="TradingPairs" Style="{StaticResource TextBox3}"/>
+                        <TextBox Text="Socket" Style="{StaticResource TextBox3}"/>
+                        <TextBox Text="ExchangeUrl" Style="{StaticResource TextBox3}"/>
+                        <TextBox Text="Updated" Style="{StaticResource TextBox3}"/>
                     </StackPanel>
                     
                     <StackPanel Grid.Column="1">

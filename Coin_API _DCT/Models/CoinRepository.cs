@@ -194,6 +194,21 @@ namespace Coin_API__DCT.Models
             return collectionList;
         }
 
+
+        public ObservableCollection<Market> GetMarket()
+        {
+            GetFile(selectedAPI);
+            var collectionList = new ObservableCollection<Market>();
+            var list = JsonConvert.DeserializeObject<IEnumerable<Market>>(File.ReadAllText(filePath));
+
+            foreach (var item in list)
+            {
+                collectionList.Add(item);
+            }
+
+            return collectionList;
+        }
+
         public ObservableCollection<Asset> SearchCoin(string search)
         {
             GetFile(selectedAPI);

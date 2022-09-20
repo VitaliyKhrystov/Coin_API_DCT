@@ -8,9 +8,6 @@
         mc:Ignorable="d"
         Title="CoinCap API" Height="700" Width="1100">
 
-    <!--<Window.DataContext>
-        <viewmodel:MainWindowViewModel/>
-    </Window.DataContext>-->
     
     <Window.Resources>
 

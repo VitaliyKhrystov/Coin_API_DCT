@@ -11,7 +11,7 @@ namespace Coin_API__DCT.Models
 
         public JsonFile(string api)
         {
-            API = api;
+            API = api == null ? "https://api.coincap.io/v2/assets" : api;
         }
 
         public void GetJsonFile()
@@ -23,8 +23,16 @@ namespace Coin_API__DCT.Models
                 File.Delete(FilePath);
             }
 
-            WebClient webClient = new WebClient();
-            json = webClient.DownloadString(API);
+            try
+            {
+                WebClient webClient = new WebClient();
+                json = webClient.DownloadString(API);
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+           
 
             int v = json.IndexOf('[');
             int v2 = json.IndexOf(']');
