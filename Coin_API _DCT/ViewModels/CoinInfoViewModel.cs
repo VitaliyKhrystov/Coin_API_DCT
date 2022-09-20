@@ -38,9 +38,9 @@ namespace Coin_API__DCT.ViewModels
         {
             this.asset = asset;
             Coin = new Coin(asset);
-            Market = new Market(asset.Id);
-            Rate = new Rate(asset.Id);
-            Exchange = new Exchange(asset.Id);
+            Market = new Pages.Market(asset.Id);
+            Rate = new Pages.Rate(asset.Id);
+            Exchange = new Pages.Exchange(asset.Id);
             History = new History(asset.Id);
             CurrentPage = Coin;
         }

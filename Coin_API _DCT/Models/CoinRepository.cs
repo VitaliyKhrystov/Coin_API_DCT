@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Net.Sockets;
 
 namespace Coin_API__DCT.Models
 {
@@ -12,6 +13,7 @@ namespace Coin_API__DCT.Models
     {
         public JsonFile jsonFile { get; set;}
         public Asset Asset { get; set; }
+        public Exchange Exchange { get; set; }
         public string CoinId { get; set; }
         public string filePath = "Files/file.json";
 
@@ -61,6 +63,32 @@ namespace Coin_API__DCT.Models
                 ChangePercent24Hr = 0,
                 Vwap24Hr = 0,
                 Explorer = "-"
+            };
+        }
+
+        public Exchange GetCoinByIdExchange(string id)
+        {
+         
+            var list = JsonConvert.DeserializeObject<IEnumerable<Exchange>>(File.ReadAllText(filePath));
+
+            Exchange = list.Where(r => r.Id == id).FirstOrDefault();
+
+            if (Asset != null)
+            {
+                return Exchange;
+            }
+
+            return new Exchange()
+            {
+                Id = $"Id {id} Not Found",
+                Rank = 0,
+                Name = "-",
+                PercentTotalVolume = 0,
+                VolumeUsd = 0,
+                TradingPairs = 0 ,
+                Socket = false,
+                ExchangeUrl = "-",
+                Updated = default
             };
         }
 

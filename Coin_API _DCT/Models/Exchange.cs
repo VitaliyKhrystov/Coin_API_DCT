@@ -11,7 +11,7 @@ namespace Coin_API__DCT.Models
         public decimal? VolumeUsd { get; set; }
         public int? TradingPairs { get; set; }
         public bool Socket { get; set; }
-        public string exchangeUrl { get; set; }
+        public string ExchangeUrl { get; set; }
         public DateTimeOffset Updated { get; set; }
       
     }
