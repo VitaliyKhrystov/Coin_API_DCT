@@ -7,7 +7,7 @@ namespace Coin_API__DCT.Models
     public class JsonFile
     {
         public string API { get; set; }
-        public string FilePath { get; set; } = "Files/file.json";
+        public string FilePath { get; set; } = "../../../Files/file.json";
 
         public JsonFile(string api)
         {

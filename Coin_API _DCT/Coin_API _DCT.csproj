@@ -9,7 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="bin\Debug\net6.0-windows\Files\" />
+    <Folder Include="bin\Debug\net6.0-windows\" />
+    <Folder Include="Files\" />
   </ItemGroup>
 
   <ItemGroup>

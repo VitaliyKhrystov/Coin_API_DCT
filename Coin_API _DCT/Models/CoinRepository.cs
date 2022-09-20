@@ -15,7 +15,7 @@ namespace Coin_API__DCT.Models
         public Asset Asset { get; set; }
         public Exchange Exchange { get; set; }
         public string CoinId { get; set; }
-        public string filePath = "Files/file.json";
+        public string filePath = "../../../Files/file.json";
         public string selectedAPI { get; set; }
 
         public CoinRepository(string selectedAPI)
